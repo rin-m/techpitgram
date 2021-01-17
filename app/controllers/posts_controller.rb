@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+
+  before_action :authenticate_user!
+  
   def new
     @post = Post.new
     @post.photos.build
@@ -20,5 +23,5 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:caption, photos_attributes: [:image]).merge(user_id: current_user.id)
     end
-  
+
 end
